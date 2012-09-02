@@ -24,6 +24,8 @@ public class DemoUI extends UI {
 		display.showView(new LoginView());
 
 		setContent(display);
+
+		Application.getCurrent().setLogoutURL(".");
 	}
 
 	void login(String login, String password) {
