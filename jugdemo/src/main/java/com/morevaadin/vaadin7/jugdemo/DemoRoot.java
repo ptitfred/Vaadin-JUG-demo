@@ -3,10 +3,10 @@ package com.morevaadin.vaadin7.jugdemo;
 import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Root;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class DemoRoot extends Root {
@@ -18,7 +18,10 @@ public class DemoRoot extends Root {
 	@Override
 	protected void init(WrappedRequest request) {
 
-		HorizontalLayout layout = new HorizontalLayout();
+		VerticalLayout layout = new VerticalLayout();
+
+		layout.setMargin(true);
+		layout.setSpacing(true);
 
 		Button button = new Button("Say Hello");
 
