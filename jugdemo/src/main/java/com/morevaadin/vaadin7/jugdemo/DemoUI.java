@@ -12,13 +12,21 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class DemoUI extends UI {
 
+	private SimpleViewDisplay display = new SimpleViewDisplay();
+
 	@Override
 	protected void init(WrappedRequest request) {
 
-		SimpleViewDisplay display = new SimpleViewDisplay();
-
-		display.showView(new MainView());
+		display.showView(new LoginView());
 
 		setContent(display);
+	}
+
+	void login(String login, String password) {
+
+		if ("juguser".equals(login)) {
+
+			display.showView(new MainView());
+		}
 	}
 }
