@@ -2,6 +2,7 @@ package com.morevaadin.vaadin7.jugdemo;
 
 import static com.vaadin.ui.Notification.TYPE_ERROR_MESSAGE;
 
+import com.vaadin.Application;
 import com.vaadin.navigator.Navigator.SimpleViewDisplay;
 import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.ui.Notification;
@@ -24,11 +25,18 @@ public class DemoRoot extends Root {
 
 		if ("juguser".equals(login)) {
 
+			Application.getCurrent().setUser("JUG User");
+
 			display.showView(new MainView());
 
 		} else {
 
 			Notification.show("Authentication error", TYPE_ERROR_MESSAGE);
 		}
+	}
+
+	void logout() {
+
+		Application.getCurrent().close();
 	}
 }
