@@ -87,6 +87,11 @@ public class MainView extends CustomComponent implements View {
 
 			table.setContainerDataSource(container);
 
+			table.setVisibleColumns(new String[] { "LAST_NAME", "FIRST_NAME", "MAIL", "BIRTHDATE" });
+
+			table.addGeneratedColumn("BIRTHDATE", new BirthdateColumnGenerator());
+			table.addGeneratedColumn("MAIL", new EmailColumnGenerator());
+
 		} catch (Exception e) {
 
 			throw new RuntimeException(e);
