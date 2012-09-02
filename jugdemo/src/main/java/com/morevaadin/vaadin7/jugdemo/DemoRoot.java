@@ -1,43 +1,19 @@
 package com.morevaadin.vaadin7.jugdemo;
 
+import com.vaadin.navigator.Navigator.SimpleViewDisplay;
 import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Root;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class DemoRoot extends Root {
 
-	private TextField text = new TextField("", "JUG");
-
-	private Label label = new Label();
-
 	@Override
 	protected void init(WrappedRequest request) {
 
-		VerticalLayout layout = new VerticalLayout();
+		SimpleViewDisplay display = new SimpleViewDisplay();
 
-		layout.setMargin(true);
-		layout.setSpacing(true);
+		display.showView(new MainView());
 
-		Button button = new Button("Say Hello");
-
-		button.addListener(ClickEvent.class, this, "sayHello");
-
-		layout.addComponent(text);
-		layout.addComponent(button);
-		layout.addComponent(label);
-
-		setContent(layout);
-	}
-
-	public void sayHello() {
-
-		String value = text.getValue();
-
-		label.setValue("Hello " + value + "!");
+		setContent(display);
 	}
 }
