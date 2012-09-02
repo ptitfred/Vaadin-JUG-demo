@@ -19,6 +19,8 @@ public class DemoRoot extends Root {
 		display.showView(new LoginView());
 
 		setContent(display);
+
+		Application.getCurrent().setLogoutURL(".");
 	}
 
 	void login(String login, String password) {
