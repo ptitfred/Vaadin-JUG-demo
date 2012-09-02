@@ -2,7 +2,15 @@ package com.morevaadin.vaadin7.jugdemo;
 
 import static com.vaadin.ui.Alignment.MIDDLE_RIGHT;
 
+import java.util.Properties;
+
 import com.vaadin.Application;
+import com.vaadin.data.Container;
+import com.vaadin.data.util.sqlcontainer.SQLContainer;
+import com.vaadin.data.util.sqlcontainer.connection.JDBCConnectionPool;
+import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
+import com.vaadin.data.util.sqlcontainer.query.QueryDelegate;
+import com.vaadin.data.util.sqlcontainer.query.TableQuery;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -11,6 +19,7 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Root;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -47,22 +56,41 @@ public class MainView extends CustomComponent implements View {
 
 		VerticalLayout layout = new VerticalLayout();
 
-		layout.addComponent(topBar);
-
 		layout.setMargin(true);
 		layout.setSpacing(true);
 
-		Button button = new Button("Say Hello");
+		layout.addComponent(topBar);
 
-		button.addListener(ClickEvent.class, this, "sayHello");
+		Table table = new Table();
 
-		layout.addComponent(text);
-		layout.addComponent(button);
-		layout.addComponent(label);
+		table.setWidth("100%");
+
+		layout.addComponent(table);
 
 		setCompositionRoot(layout);
 
 		Root.getCurrent().getPage().setTitle("Welcome to Vaadin JUG Demo");
+
+		Properties props = new Properties();
+
+		try {
+
+			props.load(getClass().getClassLoader().getResourceAsStream("database.properties"));
+
+			JDBCConnectionPool pool = new SimpleJDBCConnectionPool(props.getProperty("db.driver"),
+					props.getProperty("db.url"), props.getProperty("db.user"),
+					props.getProperty("db.password"));
+
+			QueryDelegate query = new TableQuery("PERSON", pool);
+
+			Container container = new SQLContainer(query);
+
+			table.setContainerDataSource(container);
+
+		} catch (Exception e) {
+
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void navigateTo(String fragmentParameters) {
