@@ -1,10 +1,13 @@
 package com.morevaadin.vaadin7.jugdemo;
 
+import static com.vaadin.ui.Notification.TYPE_ERROR_MESSAGE;
+
 import com.vaadin.navigator.Navigator.SimpleViewDisplay;
 import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -27,6 +30,10 @@ public class DemoUI extends UI {
 		if ("juguser".equals(login)) {
 
 			display.showView(new MainView());
+
+		} else {
+
+			Notification.show("Authentication error", TYPE_ERROR_MESSAGE);
 		}
 	}
 }

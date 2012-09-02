@@ -41,6 +41,8 @@ public class LoginView extends CustomComponent implements View {
 		});
 
 		layout.addComponent(button);
+
+		Root.getCurrent().getPage().setTitle("Login...");
 	}
 
 	public void navigateTo(String fragmentParameters) {
