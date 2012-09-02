@@ -5,6 +5,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Root;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -30,7 +31,9 @@ public class MainView extends CustomComponent implements View {
 		layout.addComponent(button);
 		layout.addComponent(label);
 
-		this.setCompositionRoot(layout);
+		setCompositionRoot(layout);
+
+		Root.getCurrent().getPage().setTitle("Welcome to Vaadin JUG Demo");
 	}
 
 	public void navigateTo(String fragmentParameters) {
